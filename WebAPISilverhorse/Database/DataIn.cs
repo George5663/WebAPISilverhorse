@@ -17,9 +17,14 @@ namespace WebAPISilverhorse.Database
         private static HttpResponseMessage response;
 
         //Used to recieve the list of data from the datasource
-        public static async Task<string> Get(string dataName)
+        public static async Task<string> Get(string dataName, int optionalId = 0)
         {
             string url = defaultUrl + dataName;
+
+            if(optionalId != 0)
+            {
+                url += ("/" + optionalId.ToString());
+            }
 
             response = await httpClient.GetAsync(url);
 
